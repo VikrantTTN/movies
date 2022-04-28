@@ -5,9 +5,19 @@ const express = require('express');
 const checkAdmin = require('../middleware/checkAdmin');
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', async (req, res, next) => {
+  
+  try {
+
   const genres = await Genre.find().sort('name');
   res.send(genres);
+    
+  } catch (error) {
+
+    next(error)
+    
+  }
+
 });
 
 router.post('/',auth, async (req, res) => {

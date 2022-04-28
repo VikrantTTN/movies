@@ -8,6 +8,7 @@ const rentals = require('./routes/rentals');
 const users=require('./routes/users');
 const authentication=require('./routes/authentication');
 const express = require('express');
+const handleErrors = require('./middleware/handleErrors');
 const app = express();
 
 mongoose.connect('mongodb://localhost:27017/moviesApi',{ useNewUrlParser: true,useUnifiedTopology: true })
@@ -21,6 +22,8 @@ app.use('/api/movies', movies);
 app.use('/api/rentals', rentals);
 app.use('/api/users',users);
 app.use('/api/authentication',authentication);
+
+app.use(handleErrors)
 
 
 const port = 3000;
